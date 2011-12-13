@@ -1,6 +1,6 @@
 require 'rubygems'
 require 'rspec/core/rake_task'
-require "#{File.dirname(__FILE__)}/lib/r509-validity-redis/version"
+require "#{File.dirname(__FILE__)}/lib/r509/Validity/Redis/Version"
 
 task :default => :spec
 RSpec::Core::RakeTask.new(:spec)

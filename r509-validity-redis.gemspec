@@ -1,5 +1,5 @@
 $:.push File.expand_path("../lib", __FILE__)
-require "r509-validity-redis/version"
+require "r509/Validity/Redis/Version"
 
 spec = Gem::Specification.new do |s|
   s.name = 'r509-validity-redis'

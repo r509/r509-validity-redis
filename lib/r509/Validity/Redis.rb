@@ -9,6 +9,7 @@ unless Kernel.respond_to?(:require_relative)
 end
 
 module R509::Validity::Redis
-    require_relative('r509-validity-redis/Checker.rb')
-    require_relative('r509-validity-redis/Writer.rb')
+    require_relative('Redis/Checker.rb')
+    require_relative('Redis/Writer.rb')
 end
+
