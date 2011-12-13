@@ -3,7 +3,7 @@ require "r509-validity-redis/version"
 
 spec = Gem::Specification.new do |s|
   s.name = 'r509-validity-redis'
-  s.version = R509ValidityRedis::VERSION
+  s.version = R509::Validity::Redis::VERSION
   s.platform = Gem::Platform::RUBY
   s.has_rdoc = false
   s.summary = "A Validity::Writer and Validity::Checker for r509, implemented with a Redis backend"

@@ -25,6 +25,6 @@ The "revocation_response" field can be one of:
 Use this in a project like ocsp-responder by passing it into R509::Ocsp::Signer's constructor:
 
     R509::Ocsp::Signer.new(
-        :validity_checker => R509ValidityRedis::Checker.new(Redis.new)
+        :validity_checker => R509::Validity::Redis::Checker.new(Redis.new)
     )
 

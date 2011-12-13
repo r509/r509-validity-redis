@@ -19,7 +19,7 @@ end
 
 desc 'Install gem'
 task :gem_install do
-	puts `gem install r509-validity-redis-#{R509ValidityRedis::VERSION}.gem`
+	puts `gem install r509-validity-redis-#{R509::Validity::Redis::VERSION}.gem`
 end
 
 desc 'Uninstall gem'

@@ -1,6 +1,6 @@
 require "r509"
 
-module R509ValidityRedis
+module R509::Validity::Redis
     class Writer < R509::Validity::Writer
         def initialize(redis)
             raise ArgumentError.new("Redis must be provided") if redis.nil?
