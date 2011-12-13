@@ -47,7 +47,7 @@ describe R509::Validity::Redis::Writer do
             redis = double("redis")
             writer = R509::Validity::Redis::Writer.new(redis)
             redis.should_receive(:hmset).with("cert:123", "status", 1, "revocation_time", Time.now.to_i, "revocation_reason", 0)
-            writer.revoke(123)
+            writer.revoke(123, nil)
         end
         it "when reason is provided" do
             redis = double("redis")

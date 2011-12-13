@@ -17,7 +17,7 @@ module R509::Validity::Redis
             @redis.hmset("cert:#{serial}", 
                 "status", 1, 
                 "revocation_time", Time.now.to_i, 
-                "revocation_reason", reason
+                "revocation_reason", reason || 0
             )
         end
     end
