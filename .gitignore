@@ -1,3 +1,6 @@
 *.gem
 rspec_results.html
+coverage
+.yardoc
+doc
 

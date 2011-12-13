@@ -7,6 +7,7 @@ module R509::Validity::Redis
             @redis = redis
         end
 
+        # @return [R509::Validity::Status]
         def check(serial)
             raise ArgumentError.new("Serial must be provided") if serial.nil? or serial.to_s.empty?
 
