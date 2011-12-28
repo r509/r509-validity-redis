@@ -82,11 +82,24 @@ describe R509::Validity::Redis::Writer do
             writer = R509::Validity::Redis::Writer.new(redis)
             expect { writer.unrevoke("") }.to raise_error(ArgumentError, "Serial must be provided")
         end
-        it "when serail is provided" do
+        it "when serial is provided" do
             redis = double("redis")
             writer = R509::Validity::Redis::Writer.new(redis)
+            redis.should_receive(:hgetall).with("cert:123").and_return({"status" => 1})
             redis.should_receive(:hmset).with("cert:123", "status", 0)
             writer.unrevoke(123)
+        end
+        it "when cert record doesn't exist (nil)" do
+            redis = double("redis")
+            writer = R509::Validity::Redis::Writer.new(redis)
+            redis.should_receive(:hgetall).with("cert:123").and_return(nil)
+            expect { writer.unrevoke(123) }.to raise_error(StandardError, "Serial 123 is not present")
+        end
+        it "when cert record doesn't exist ({})" do
+            redis = double("redis")
+            writer = R509::Validity::Redis::Writer.new(redis)
+            redis.should_receive(:hgetall).with("cert:123").and_return({})
+            expect { writer.unrevoke(123) }.to raise_error(StandardError, "Serial 123 is not present")
         end
     end
 end

@@ -28,7 +28,12 @@ module R509::Validity::Redis
 
         def unrevoke(serial)
             raise ArgumentError.new("Serial must be provided") if serial.nil? or serial.to_s.empty?
-            @redis.hmset("cert:#{serial}", "status", 0)
+            cert = @redis.hgetall("cert:#{serial}")
+            if cert.nil? or not cert.has_key?("status")
+                raise StandardError.new("Serial #{serial} is not present")
+            else
+                @redis.hmset("cert:#{serial}", "status", 0)
+            end
         end
     end
 end
