@@ -51,23 +51,29 @@ describe R509::Validity::Redis::Writer do
             writer = R509::Validity::Redis::Writer.new(redis)
             expect { writer.revoke("") }.to raise_error(ArgumentError, "Serial must be provided")
         end
-        it "when reason isn't provided" do
+        it "when time and reason aren't provided" do
             redis = double("redis")
             writer = R509::Validity::Redis::Writer.new(redis)
             redis.should_receive(:hmset).with("cert:123", "status", 1, "revocation_time", Time.now.to_i, "revocation_reason", 0)
             writer.revoke(123)
         end
-        it "when reason is nil" do
+        it "when time and reason are nil" do
             redis = double("redis")
             writer = R509::Validity::Redis::Writer.new(redis)
             redis.should_receive(:hmset).with("cert:123", "status", 1, "revocation_time", Time.now.to_i, "revocation_reason", 0)
-            writer.revoke(123, nil)
+            writer.revoke(123, nil, nil)
         end
-        it "when reason is provided" do
+        it "when time is provided, but not reason" do
             redis = double("redis")
             writer = R509::Validity::Redis::Writer.new(redis)
-            redis.should_receive(:hmset).with("cert:123", "status", 1, "revocation_time", Time.now.to_i, "revocation_reason", 2)
-            writer.revoke(123, 2)
+            redis.should_receive(:hmset).with("cert:123", "status", 1, "revocation_time", 100, "revocation_reason", 0)
+            writer.revoke(123, 100)
+        end
+        it "when time and reason are provided" do
+            redis = double("redis")
+            writer = R509::Validity::Redis::Writer.new(redis)
+            redis.should_receive(:hmset).with("cert:123", "status", 1, "revocation_time", 100, "revocation_reason", 2)
+            writer.revoke(123, 100, 2)
         end
     end
 

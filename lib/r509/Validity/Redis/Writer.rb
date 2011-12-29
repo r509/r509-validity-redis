@@ -17,11 +17,11 @@ module R509::Validity::Redis
             end
         end
 
-        def revoke(serial, reason=0)
+        def revoke(serial, revocation_time=Time.now.to_i, reason=0)
             raise ArgumentError.new("Serial must be provided") if serial.nil? or serial.to_s.empty?
             @redis.hmset("cert:#{serial}", 
                 "status", 1, 
-                "revocation_time", Time.now.to_i, 
+                "revocation_time", revocation_time || Time.now.to_i, 
                 "revocation_reason", reason || 0
             )
         end
