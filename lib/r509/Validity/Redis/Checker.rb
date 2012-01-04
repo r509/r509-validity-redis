@@ -8,10 +8,10 @@ module R509::Validity::Redis
         end
 
         # @return [R509::Validity::Status]
-        def check(issuer_fingerprint,serial)
-            raise ArgumentError.new("Serial and issuer fingerprint must be provided") if serial.to_s.empty? or issuer_fingerprint.to_s.empty?
+        def check(issuer,serial)
+            raise ArgumentError.new("Serial and issuer must be provided") if serial.to_s.empty? or issuer.to_s.empty?
 
-            hash = @redis.hgetall("cert:#{issuer_fingerprint}:#{serial}")
+            hash = @redis.hgetall("cert:#{issuer}:#{serial}")
             if not hash.nil? and hash.has_key?("status")
                 R509::Validity::Status.new(
                     :status => hash["status"].to_i,

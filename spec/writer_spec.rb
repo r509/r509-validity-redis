@@ -8,15 +8,15 @@ describe R509::Validity::Redis::Writer do
     end
 
     context "issue" do
-        it "when issuer fingerprint is nil/empty string" do
+        it "when issuer is nil/empty string" do
             redis = double("redis")
             writer = R509::Validity::Redis::Writer.new(redis)
-            expect { writer.issue(nil,123) }.to raise_error(ArgumentError, "Serial and issuer fingerprint must be provided")
+            expect { writer.issue(nil,123) }.to raise_error(ArgumentError, "Serial and issuer must be provided")
         end
         it "when serial is nil/empty string" do
             redis = double("redis")
             writer = R509::Validity::Redis::Writer.new(redis)
-            expect { writer.issue("abcdef",nil) }.to raise_error(ArgumentError, "Serial and issuer fingerprint must be provided")
+            expect { writer.issue("abcdef",nil) }.to raise_error(ArgumentError, "Serial and issuer must be provided")
         end
         it "when serial/issuer is provided (check returns nil)" do
             redis = double("redis")
@@ -41,15 +41,15 @@ describe R509::Validity::Redis::Writer do
     end
 
     context "revoke" do
-        it "when issuer fingerprint is nil/empty string" do
+        it "when issuer is nil/empty string" do
             redis = double("redis")
             writer = R509::Validity::Redis::Writer.new(redis)
-            expect { writer.revoke(nil,123) }.to raise_error(ArgumentError, "Serial and issuer fingerprint must be provided")
+            expect { writer.revoke(nil,123) }.to raise_error(ArgumentError, "Serial and issuer must be provided")
         end
         it "when serial is nil/empty string" do
             redis = double("redis")
             writer = R509::Validity::Redis::Writer.new(redis)
-            expect { writer.revoke("abcdef",nil) }.to raise_error(ArgumentError, "Serial and issuer fingerprint must be provided")
+            expect { writer.revoke("abcdef",nil) }.to raise_error(ArgumentError, "Serial and issuer must be provided")
         end
         it "when time and reason aren't provided" do
             redis = double("redis")
@@ -78,15 +78,15 @@ describe R509::Validity::Redis::Writer do
     end
 
     context "unrevoke" do
-        it "when issuer fingerprint is nil/empty string" do
+        it "when issuer is nil/empty string" do
             redis = double("redis")
             writer = R509::Validity::Redis::Writer.new(redis)
-            expect { writer.unrevoke(nil,123) }.to raise_error(ArgumentError, "Serial and issuer fingerprint must be provided")
+            expect { writer.unrevoke(nil,123) }.to raise_error(ArgumentError, "Serial and issuer must be provided")
         end
         it "when serial is nil/empty string" do
             redis = double("redis")
             writer = R509::Validity::Redis::Writer.new(redis)
-            expect { writer.unrevoke("abcdef",nil) }.to raise_error(ArgumentError, "Serial and issuer fingerprint must be provided")
+            expect { writer.unrevoke("abcdef",nil) }.to raise_error(ArgumentError, "Serial and issuer must be provided")
         end
         it "when serial/issuer is provided" do
             redis = double("redis")

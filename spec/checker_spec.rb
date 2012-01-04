@@ -7,15 +7,15 @@ describe R509::Validity::Redis::Checker do
         end
     end
     context "check" do
-        it "throws an exception when issuer fingerprint is nil/empty string" do
+        it "throws an exception when issuer is nil/empty string" do
             redis = double("redis")
             checker = R509::Validity::Redis::Checker.new(redis)
-            expect { checker.check(nil,123) }.to raise_error(ArgumentError, "Serial and issuer fingerprint must be provided")
+            expect { checker.check(nil,123) }.to raise_error(ArgumentError, "Serial and issuer must be provided")
         end
         it "throws an exception when serial is nil/empty string" do
             redis = double("redis")
             checker = R509::Validity::Redis::Checker.new(redis)
-            expect { checker.check("abcdef",nil) }.to raise_error(ArgumentError, "Serial and issuer fingerprint must be provided")
+            expect { checker.check("abcdef",nil) }.to raise_error(ArgumentError, "Serial and issuer must be provided")
         end
         it "gets unknown when serial is not found (returns {})" do
             redis = double("redis")
