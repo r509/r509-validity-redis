@@ -8,4 +8,4 @@ $:.unshift File.expand_path("../", __FILE__)
 require 'rubygems'
 #require 'fixtures'
 require 'rspec'
-require 'r509/Validity/Redis'
+require 'r509/validity/redis'
