@@ -36,7 +36,7 @@ describe R509::Validity::Redis::Writer do
             redis = double("redis")
             writer = R509::Validity::Redis::Writer.new(redis)
             redis.should_receive(:hgetall).with("cert:abcdef:123").and_return({"status"=>0})
-            expect { writer.issue("abcdef",123) }.to raise_error(StandardError, "Serial 123 for issuer abcdef is already present")
+            expect { writer.issue("abcdef",123) }.to raise_error(R509::R509Error, "Serial 123 for issuer abcdef is already present")
         end
     end
 
@@ -99,13 +99,13 @@ describe R509::Validity::Redis::Writer do
             redis = double("redis")
             writer = R509::Validity::Redis::Writer.new(redis)
             redis.should_receive(:hgetall).with("cert:abcdef:123").and_return(nil)
-            expect { writer.unrevoke("abcdef",123) }.to raise_error(StandardError, "Serial 123 for issuer abcdef is not present")
+            expect { writer.unrevoke("abcdef",123) }.to raise_error(R509::R509Error, "Serial 123 for issuer abcdef is not present")
         end
         it "when cert record doesn't exist ({})" do
             redis = double("redis")
             writer = R509::Validity::Redis::Writer.new(redis)
             redis.should_receive(:hgetall).with("cert:abcdef:123").and_return({})
-            expect { writer.unrevoke("abcdef",123) }.to raise_error(StandardError, "Serial 123 for issuer abcdef is not present")
+            expect { writer.unrevoke("abcdef",123) }.to raise_error(R509::R509Error, "Serial 123 for issuer abcdef is not present")
         end
     end
 end

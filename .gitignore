@@ -1,6 +1,5 @@
 *.gem
-rspec_results.html
+Gemfile.lock
 coverage
 .yardoc
 doc
-

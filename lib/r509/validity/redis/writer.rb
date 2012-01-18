@@ -13,7 +13,7 @@ module R509::Validity::Redis
             if cert.nil? or not cert.has_key?("status")
                 @redis.hmset("cert:#{issuer}:#{serial}", "status", 0)
             else
-                raise StandardError.new("Serial #{serial} for issuer #{issuer} is already present")
+                raise R509::R509Error.new("Serial #{serial} for issuer #{issuer} is already present")
             end
         end
 
@@ -30,7 +30,7 @@ module R509::Validity::Redis
             raise ArgumentError.new("Serial and issuer must be provided") if serial.to_s.empty? or issuer.to_s.empty?
             cert = @redis.hgetall("cert:#{issuer}:#{serial}")
             if cert.nil? or not cert.has_key?("status")
-                raise StandardError.new("Serial #{serial} for issuer #{issuer} is not present")
+                raise R509::R509Error.new("Serial #{serial} for issuer #{issuer} is not present")
             else
                 @redis.hmset("cert:#{issuer}:#{serial}", "status", 0)
             end
