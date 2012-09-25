@@ -18,7 +18,7 @@ The "status" field can be one of:
     R509::Validity::VALID
     R509::Validity::REVOKED
 
-The "revocation_response" field can be one of:
+The "revocation_reason" field can be one of:
 
     I don't know, we should probably find out
 
