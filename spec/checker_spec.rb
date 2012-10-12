@@ -50,4 +50,19 @@ describe R509::Validity::Redis::Checker do
             status.revocation_reason.should == 5
         end
     end
+    context "is available" do
+        it "returns true if redis is available" do
+            redis = double("redis")
+            redis.should_receive(:ping).and_return("PONG")
+            checker = R509::Validity::Redis::Checker.new(redis)
+            checker.is_available?.should == true
+        end
+
+        it "raises error if redis is unavailable" do
+            redis = double("redis")
+            redis.should_receive(:ping).and_return(StandardError)
+            checker = R509::Validity::Redis::Checker.new(redis)
+            checker.is_available?.should == false
+        end
+    end
 end

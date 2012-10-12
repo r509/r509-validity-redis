@@ -22,5 +22,9 @@ module R509::Validity::Redis
                 R509::Validity::Status.new(:status => R509::Validity::UNKNOWN)
             end
         end
+
+        def is_available?
+            (@redis.ping == "PONG")? true : false
+        end
     end
 end
