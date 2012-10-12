@@ -35,5 +35,9 @@ module R509::Validity::Redis
                 @redis.hmset("cert:#{issuer}:#{serial}", "status", 0)
             end
         end
+
+        def is_available?
+            (@redis.ping == "PONG")? true : false
+        end
     end
 end

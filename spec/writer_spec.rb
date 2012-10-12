@@ -108,4 +108,20 @@ describe R509::Validity::Redis::Writer do
             expect { writer.unrevoke("abcdef",123) }.to raise_error(R509::R509Error, "Serial 123 for issuer abcdef is not present")
         end
     end
+
+    context "is available" do
+        it "returns true if redis is available" do
+            redis = double("redis")
+            redis.should_receive(:ping).and_return("PONG")
+            writer = R509::Validity::Redis::Writer.new(redis)
+            writer.is_available?.should == true
+        end
+
+        it "raises error if redis is unavailable" do
+            redis = double("redis")
+            redis.should_receive(:ping).and_return(StandardError)
+            writer = R509::Validity::Redis::Writer.new(redis)
+            writer.is_available?.should == false
+        end
+    end
 end
