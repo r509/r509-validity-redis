@@ -8,7 +8,7 @@ spec = Gem::Specification.new do |s|
   s.has_rdoc = false
   s.summary = "A Validity::Writer and Validity::Checker for r509, implemented with a Redis backend"
   s.description = "A Validity::Writer and Validity::Checker for r509, implemented with a Redis backend"
-  s.add_dependency 'r509', "~> 0.8"
+  s.add_dependency 'r509', "~> 0.8.0"
   s.add_dependency 'redis'
   s.add_dependency 'rake'
   s.add_development_dependency 'rspec'
