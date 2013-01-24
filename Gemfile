@@ -1,6 +1,7 @@
 source "http://rubygems.org"
 
-gem "r509", :git => "git://github.com/reaperhulk/r509.git", :tag => "v0.8.1"
+#gem "r509", :git => "git://github.com/reaperhulk/r509.git", :tag => "v0.8.1"
+gem "r509", :git => "git://github.com/reaperhulk/r509.git", :branch => "ec"
 group :documentation do
     gem "yard", "~>0.8.2"
     gem "redcarpet", "~>2.1.1"
