@@ -6,7 +6,7 @@ When a certificate is issued, we want this sent to Redis:
 
 When revoked:
 
-    HMSET "cert:<issuer>:<serial>" status 1 revocation\_time <timestamp> revocation\_reason 0
+    HMSET "cert:<issuer>:<serial>" status 1 revocation_time <timestamp> revocation_reason 0
 
 
 To get the status of a certificate:
