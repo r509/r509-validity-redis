@@ -8,13 +8,12 @@ spec = Gem::Specification.new do |s|
   s.has_rdoc = false
   s.summary = "A Validity::Writer and Validity::Checker for r509, implemented with a Redis backend"
   s.description = "A Validity::Writer and Validity::Checker for r509, implemented with a Redis backend"
-  s.add_dependency 'r509', '~> 0.9.0'
+  s.add_dependency 'r509'
   s.add_dependency 'redis'
   s.add_dependency 'rake'
   s.add_development_dependency 'rspec'
   s.add_development_dependency 'syntax'
-  s.add_development_dependency 'rcov' if RUBY_VERSION.split('.')[1].to_i == 8
-  s.add_development_dependency 'simplecov' if RUBY_VERSION.split('.')[1].to_i == 9
+  s.add_development_dependency 'simplecov'
   s.author = "Sean Schulte"
   s.email = "sirsean@gmail.com"
   s.homepage = "http://langui.sh"
